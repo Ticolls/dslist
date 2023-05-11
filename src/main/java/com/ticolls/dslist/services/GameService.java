@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ticolls.dslist.dto.GameDTO;
 import com.ticolls.dslist.dto.GameMinDTO;
 import com.ticolls.dslist.entities.Game;
+import com.ticolls.dslist.projections.GameMinProjection;
 import com.ticolls.dslist.repositories.GameRepository;
 
 @Service
@@ -29,4 +30,12 @@ public class GameService {
 
         return dtos;
     }
+
+    public List<GameMinDTO> findByList(Long listId) {
+        List<GameMinProjection> data = repository.searchByList(listId);
+        List<GameMinDTO> dtos = data.stream().map(GameMinDTO::new).toList();
+
+        return dtos;
+    }
+
 }
